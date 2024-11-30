@@ -3,36 +3,50 @@
 This repository contains the code for reproducing the paper ``Towards Robust Interpretability with Self-Explaining Neural Networks''[1] and extending it. The authors propose a framework called SENN (Self-Explaining Neural Network) which is transparent by design. We study the reproducibilty and validity of the proposed framework. Several weaknesses of the approach are identified. Most notably, we find that the model rarely generates good explanations, and that performance is compromised more than reported by the authors when enforcing explanations to be stable.  We put forward improvements to the framework that address these weaknesses in a principled way, and show them to enhance the interpretability of generated explanations.
 
 ## Table of Contents
-  1. [Project Structure](#project-structure)
-  2. [How to run?](#how-to-run)
-  3. [Results](#results)
-  4. [Documentation](#documentation)
-  5. [Authors](#authors)
-  6. [References](#references)
+- [Self-Explaining Neural Networks: A review with extensions](#self-explaining-neural-networks-a-review-with-extensions)
+  - [Table of Contents](#table-of-contents)
+  - [Project Structure](#project-structure)
+  - [How to run?](#how-to-run)
+  - [Results](#results)
+  - [Documentation](#documentation)
+  - [Authors](#authors)
+  - [References](#references)
 
 ## Project Structure
 <img src="images/UML-SENN.png" alt="Project Structure" width="720">
 
 ## How to run?
 
-1. Clone and activate our conda environment
-```
- git clone https://github.com/AmanDaVinci/SENN
- cd senn
- conda env create -f "environment.yml
- conda activate senn
+1. Clone and set up Python environment
+```bash
+# Clone repository
+git clone https://github.com/ngu-khoi/SENN
+cd SENN
+
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment
+# On Windows:
+venv\Scripts\activate
+# On macOS/Linux:
+source venv/bin/activate
+
+# Install requirements
+pip install -r requirements.txt
+
 ```
 
 2. To reproduce our results using trained models, run the [Report Notebook](report.ipynb).  
 
 3. To train a model using one of our experiment parameters:
-```
-  python main.py --config "configs/compas_lambda1e-4_seed555.json"
+```bash
+python main.py --config "configs/compas_lambda1e-4_seed555.json"
 ```
 
 4. To train a new model or perform a new experiment:
-```
- python main.py --config "./config.json"
+```bash
+python main.py --config "./config.json"
 ```
 
 Where *config.json* is prepared according to the template below:
