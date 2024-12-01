@@ -1,14 +1,15 @@
-# Self-Explaining Neural Networks: A review with extensions
+# Self-Explaining Neural Networks: Testing Robustness on 3D Rotational Perturbations
 
-This repository contains the code for reproducing the paper ``Towards Robust Interpretability with Self-Explaining Neural Networks''[1] and extending it. The authors propose a framework called SENN (Self-Explaining Neural Network) which is transparent by design. We study the reproducibilty and validity of the proposed framework. Several weaknesses of the approach are identified. Most notably, we find that the model rarely generates good explanations, and that performance is compromised more than reported by the authors when enforcing explanations to be stable.  We put forward improvements to the framework that address these weaknesses in a principled way, and show them to enhance the interpretability of generated explanations.
+This repository extends the work on Self-Explaining Neural Networks (SENN) [1], specifically focusing on testing their robustness against 3D rotational perturbations. This implementation builds upon the excellent work done in "SENN: A Review with Extensions" [3] by Hussain et al., which provided a thorough analysis and improvements to the original SENN framework.
+
+Our extension investigates how SENN models perform when faced with 3D rotational perturbations, exploring the stability and reliability of their explanations under these transformations. We aim to understand whether the interpretability benefits of SENN are preserved when objects are viewed from different angles in 3D space.
 
 ## Table of Contents
-- [Self-Explaining Neural Networks: A review with extensions](#self-explaining-neural-networks-a-review-with-extensions)
+- [Self-Explaining Neural Networks: Testing Robustness on 3D Rotational Perturbations](#self-explaining-neural-networks-testing-robustness-on-3d-rotational-perturbations)
   - [Table of Contents](#table-of-contents)
   - [Project Structure](#project-structure)
   - [How to run?](#how-to-run)
   - [Results](#results)
-  - [Documentation](#documentation)
   - [Authors](#authors)
   - [References](#references)
 
@@ -87,26 +88,21 @@ Note: It is also possible to specify the architectures of the parameterizer and 
 
 
 ## Results
-The [Report Notebook](report.ipynb) reproduces all the results of our experiments. Here we present the major results:
-1. Reproduced MNIST Test Accuracy: 98.9%
-2. Reproduced COMPAS Test Accuracy: 80.9%
-3. SENN Explanations: ![](images/senn_concept_activations.png)
-4. SENN Prototypes: ![](images/senn_concept_prototypes.png)
-
-## Documentation
-The documentation of our SENN package is available on https://senn.readthedocs.io/en/latest/
+TBD
 
 ## Authors
-* Aman Hussain (aman.hussain@student.uva.nl) ID: 12667447  
-* Omar Elbaghdadi (omarelb@gmail.com) ID: 12660256  
-* Christoph Hoenes (christoph.hoenes@gmail.com) ID: 12861944    
-* Ivan Bardarov (ivan.bardarov@student.uva.nl)  ID: 12579572  
+* Khoi Nguyen (khoinguyen@college.harvard.edu)
+* Saketh Mynampati (sbmynampati@college.harvard.edu)
 
-**Supervisor:**  
-Simon Passenheim
+**Professor:**  
+Finale Doshi-Velez
 
 ## References
 [1] David Alvarez Melis, Tommi S. Jaakkola  
-"Towards Robust Interpretability with Self-Explaining Neural Networks" NIPS 2018  
+["Towards Robust Interpretability with Self-Explaining Neural Networks"](https://papers.nips.cc/paper/2018/hash/3e9f0fc9b2f89e043bc6233994dfcf76-Abstract.html) NIPS 2018  
+
 [2] Irina Higgins, et al.  
-”β-VAE: Learning basic visual concepts with a constrained variational framework.” ICLR 2017. 
+["β-VAE: Learning Basic Visual Concepts with a Constrained Variational Framework"](https://openreview.net/forum?id=Sy2fzU9gl) ICLR 2017
+
+[3] SENN Implementation Review with Extensions
+[GitHub Repository](https://github.com/AmanDaVinci/SENN/tree/master)
