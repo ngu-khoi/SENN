@@ -230,6 +230,21 @@ def rotate_image(
 
 def rotate_resize_and_cast(image, x_rotation=0, y_rotation=0, z_rotation=0):
     """Rotates the image, resizes if needed, and casts onto a 28x28 canvas."""
+    # Store input dtype
+    input_dtype = image.dtype
+
+    # Make sure image is uint8 for rotation
+    if np.issubdtype(input_dtype, np.floating):
+        # Normalize assuming typical range of [-0.5, 3.0]
+        image = np.clip((image + 0.5) / 2.5, 0, 1)
+        image = (image * 255).astype(np.uint8)
+
+    # Ensure image is 3-channel if it isn't already
+    if len(image.shape) == 2:
+        image = cv2.merge([image] * 3)
+    elif len(image.shape) == 3 and image.shape[2] == 1:
+        image = cv2.merge([image[:, :, 0]] * 3)
+
     # Rotate the image
     rotated_img = rotate_image(
         image, x_rotation=x_rotation, y_rotation=y_rotation, z_rotation=z_rotation
@@ -237,20 +252,18 @@ def rotate_resize_and_cast(image, x_rotation=0, y_rotation=0, z_rotation=0):
 
     # Check if rotation increased the image dimensions beyond 28x28
     if rotated_img.shape[0] > 28 or rotated_img.shape[1] > 28:
-        # Compute scaling factor to fit within 28x28
         scale_factor = 28 / max(rotated_img.shape[:2])
         new_size = (
             max(1, int(rotated_img.shape[1] * scale_factor)),
             max(1, int(rotated_img.shape[0] * scale_factor)),
         )
-
-        # Resize the rotated image to fit within 28x28
         resized_img = cv2.resize(rotated_img, new_size, interpolation=cv2.INTER_AREA)
     else:
-        resized_img = rotated_img  # No resizing needed if within bounds
+        resized_img = rotated_img
 
-    # Create a blank 28x28 canvas and center the resized image on it
+    # Create a canvas filled with the background value
     canvas = np.zeros((28, 28, 3), dtype=np.uint8)
+
     y_offset = (28 - resized_img.shape[0]) // 2
     x_offset = (28 - resized_img.shape[1]) // 2
     canvas[
